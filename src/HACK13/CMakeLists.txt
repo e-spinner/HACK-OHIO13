@@ -59,10 +59,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 # --------------------
 # Install Extra Folders
 # --------------------
-# install(
-#   DIRECTORY launch description
-#   DESTINATION share/${PROJECT_NAME}
-# )
+install(
+  DIRECTORY launch config
+  DESTINATION share/${PROJECT_NAME}
+)
 
 # --------------------
 # Python nodes
