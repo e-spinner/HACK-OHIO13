@@ -22,7 +22,7 @@ class AckCalc(Node):
     )
 
   def Angle_Callback(self, msg: Angle):
-    Ideal_Angle = msg.theta
+    Ideal_Angle = m.radians(msg.theta)
     Ackermann_Angles = self.Linkage_Angles(Ideal_Angle, Radius)
     Output_Msg = AckState()
     Output_Msg.theta_2 = Ackermann_Angles[0]
