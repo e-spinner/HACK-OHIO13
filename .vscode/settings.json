@@ -2,7 +2,8 @@
   "python.analysis.extraPaths": [
     "/opt/ros/humble/lib/python3.12/site-packages",
     "/opt/ros/jazzy/lib/python3.12/site-packages",
-    "install/hack13/local/lib/python3.10/dist-packages"
+    "install/hack13/local/lib/python3.10/dist-packages",
+    "install/hack13/lib/python3.12/site-packages"
   ],
 
 }

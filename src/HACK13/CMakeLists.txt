@@ -36,7 +36,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 
 # Make executables depend on generated interfaces
-# rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 # target_link_libraries(NAME ${cpp_typesupport_target})
 
@@ -67,16 +67,16 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 # --------------------
 # Python nodes
 # --------------------
-# find_package(ament_cmake_python REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 
 # Install Python module
-# ament_python_install_package(hack13_py)
+ament_python_install_package(hack13_py)
 
 # Install Python executables
-# install(PROGRAMS
-#   hack13_py/..
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(PROGRAMS
+  hack13_py/ack_calc.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()

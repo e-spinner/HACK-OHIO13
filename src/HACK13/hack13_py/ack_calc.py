@@ -7,13 +7,29 @@ from hack13.msg import Angle
 from hack13.msg import AckState
 
 
-Ideal_Angle = 55
 Radius: Final[float] = 19.05  # [mm]
 
 
 class AckCalc(Node):
   def __init__(self):
     super().__init__("ack_calc")
+
+    self.Ideal_Angle_Sub = self.create_subscription(Angle,"/theta_ideal", self.Angle_Callback,10)
+    self.Ackermann_State_Pub = self.create_publisher(AckState,"/ack_state",10)
+  
+  def Angle_Callback(self, msg:Angle):
+
+    Ideal_Angle = msg.theta
+    Ackermann_Angles = self.Linkage_Angles(Ideal_Angle,Radius)
+    Output_Msg = AckState()
+    Output_Msg.theta_2 = Ackermann_Angles[0]
+    Output_Msg.theta_3 = Ackermann_Angles[1]
+    Output_Msg.theta_4 = Ackermann_Angles[2]
+    Output_Msg.theta_5 = Ackermann_Angles[3]
+    Output_Msg.theta_pin = m.radians(Ideal_Angle) * 1.652
+    Output_Msg.d = Ackermann_Angles[4]
+    self.Ackermann_State_Pub.publish(Output_Msg)
+
 
   def Crank_Slider(a: float, b: float, c: float, Theta_2: float):
     Theta_3 = m.degrees(m.asin((a * m.sin(m.radians(Theta_2)) - c) / b) + m.pi)
@@ -77,7 +93,7 @@ class AckCalc(Node):
     Theta_4[1] = -(Theta_4[1] + 180)
     Theta_5[1] = 180 - Theta_5[1]
 
-    Angles = [Theta_2[1], Theta_3[1], Theta_4[1], Theta_5[1]]
+    Angles = [Theta_2[1], Theta_3[1], Theta_4[1], Theta_5[1],d]
     return Angles
 
 
