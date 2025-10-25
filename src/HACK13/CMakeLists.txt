@@ -7,7 +7,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# find_package(rclcpp REQUIRED)
+find_package(rclcpp REQUIRED)
 # find_package(nav_msgs REQUIRED)
 # find_package(tf2_ros REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
