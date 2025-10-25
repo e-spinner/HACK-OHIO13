@@ -38,7 +38,7 @@ ament_target_dependencies(
 
 
 # Make executables depend on generated interfaces
-# rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 target_link_libraries(cmd_interpreter ${cpp_typesupport_target})
 
@@ -69,10 +69,10 @@ install(
 # --------------------
 # Python nodes
 # --------------------
-# find_package(ament_cmake_python REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 
 # Install Python module
-# ament_python_install_package(hack13_py)
+ament_python_install_package(hack13_py)
 
 # Install Python executables
 install(PROGRAMS
