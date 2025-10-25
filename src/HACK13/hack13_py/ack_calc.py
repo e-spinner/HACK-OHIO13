@@ -31,12 +31,12 @@ class AckCalc(Node):
     self.Ackermann_State_Pub.publish(Output_Msg)
 
 
-  def Crank_Slider(a: float, b: float, c: float, Theta_2: float):
+  def Crank_Slider(self,a: float, b: float, c: float, Theta_2: float):
     Theta_3 = m.degrees(m.asin((a * m.sin(m.radians(Theta_2)) - c) / b) + m.pi)
     d = a * m.cos(m.radians(Theta_2)) - b * m.cos(m.radians(Theta_3))
     return d
 
-  def Slider_Crank_Theta2(K_1: float, K_2: float, K_3: float):
+  def Slider_Crank_Theta2(self,K_1: float, K_2: float, K_3: float):
     A = K_1 - K_3
     B = 2 * K_2
     C = K_1 + K_3
@@ -48,7 +48,7 @@ class AckCalc(Node):
     )
     return [Theta_2_Plus, Theta_2_Minus]
 
-  def Slider_Crank_Theta3(a: float, c: float, b: float, Theta2: list):
+  def Slider_Crank_Theta3(self,a: float, c: float, b: float, Theta2: list):
     Theta_3_Positive = (
       m.degrees(m.asin(-(a * m.sin(m.radians(Theta2[0])) - c) / (b))) + 180
     )
@@ -57,7 +57,7 @@ class AckCalc(Node):
     )
     return [Theta_3_Positive, Theta_3_Negative]
 
-  def Pinion_Move(Ideal_Angle: float = 0, Radius=19.05):
+  def Pinion_Move(self,Ideal_Angle: float = 0, Radius=19.05):
     """treat as angle"""
     Move = m.radians(Ideal_Angle) * 1.652 * Radius
     return Move
