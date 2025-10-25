@@ -48,7 +48,7 @@ class AckCalc(Node):
     )
     return [Theta_2_Plus, Theta_2_Minus]
 
-  def Slider_Crank_Theta3(a: float, c: float, b: float, Theta2: float):
+  def Slider_Crank_Theta3(a: float, c: float, b: float, Theta2: list):
     Theta_3_Positive = (
       m.degrees(m.asin(-(a * m.sin(m.radians(Theta2[0])) - c) / (b))) + 180
     )
