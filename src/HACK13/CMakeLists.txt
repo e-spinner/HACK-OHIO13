@@ -38,7 +38,7 @@ ament_target_dependencies(
 
 
 # Make executables depend on generated interfaces
-rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+# rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 target_link_libraries(cmd_interpreter ${cpp_typesupport_target})
 
@@ -46,9 +46,9 @@ target_link_libraries(cmd_interpreter ${cpp_typesupport_target})
 # --------------------
 # Headers
 # --------------------
-include_directories(
-  include
-)
+# include_directories(
+#   include
+# )
 
 # --------------------
 # Install Nodes
@@ -75,10 +75,10 @@ install(
 # ament_python_install_package(hack13_py)
 
 # Install Python executables
-# install(PROGRAMS
-#   hack13_py/..
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(PROGRAMS
+  hack13_py/ack_calc.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()
