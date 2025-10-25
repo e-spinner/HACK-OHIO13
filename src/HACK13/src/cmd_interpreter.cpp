@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cmath>
 #include <rclcpp/rclcpp.hpp>
 
@@ -23,7 +24,10 @@ public:
           float radius = (msg.angular.z == 0) ? 0.0 : msg.linear.x / msg.angular.z;
 
           auto angle  = hack13::msg::Angle();
-          angle.theta = (radius != 0.0) ? std::atan(WHEEL_BASE / radius) : 0.0;
+          angle.theta = (radius != 0.0) ? std::clamp(std::atan(WHEEL_BASE / radius),
+                                                     float(-0.95), float(0.95))
+                                        : 0.0;
+
           m_theta_pub->publish(angle);
         });
   }
