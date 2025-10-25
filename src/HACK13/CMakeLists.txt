@@ -73,10 +73,10 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 # ament_python_install_package(hack13_py)
 
 # Install Python executables
-# install(PROGRAMS
-#   hack13_py/..
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(PROGRAMS
+  hack13_py/ack_calc.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()
