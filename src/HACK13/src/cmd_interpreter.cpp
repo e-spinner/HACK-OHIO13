@@ -30,6 +30,8 @@ public:
 
           m_theta_pub->publish(angle);
         });
+
+    RCLCPP_INFO(this->get_logger(), "cmd_interpreter init()");
   }
 
 private:

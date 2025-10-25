@@ -21,6 +21,8 @@ class AckCalc(Node):
       AckState, "/ack_state", 10
     )
 
+    self.get_logger().info("ack_calc init()")
+
   def Angle_Callback(self, msg: Angle):
     Ideal_Angle = m.degrees(msg.theta)
     Ackermann_Angles = self.Linkage_Angles(Ideal_Angle, Radius)
