@@ -5,7 +5,6 @@ from hack13.msg import Angle
 from hack13.msg import AckState
 
 
-
 class AckCalc(Node):
   def __init__(self):
     super().__init__("ack_calc")

@@ -8,6 +8,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
 # find_package(nav_msgs REQUIRED)
 # find_package(tf2_ros REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
@@ -27,34 +28,35 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 # C++ nodes
 # ----------------
 
-# Example
-# add_executable(NAME src/PATH.cpp)
-# ament_target_dependencies(
-#   NAME
-#   DEPS
-# )
+# cmd_interpreter
+add_executable(cmd_interpreter src/cmd_interpreter.cpp)
+ament_target_dependencies(
+  cmd_interpreter
+  rclcpp
+  geometry_msgs
+)
 
 
 # Make executables depend on generated interfaces
-# rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
-# target_link_libraries(NAME ${cpp_typesupport_target})
+target_link_libraries(cmd_interpreter ${cpp_typesupport_target})
 
 
 # --------------------
 # Headers
 # --------------------
-# include_directories(
-#   include
-# )
+include_directories(
+  include
+)
 
 # --------------------
 # Install Nodes
 # --------------------
-# install(
-#   TARGETS
-#   DESTINATION lib/${PROJECT_NAME}
-# )
+install(
+  TARGETS cmd_interpreter
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 # --------------------
 # Install Extra Folders

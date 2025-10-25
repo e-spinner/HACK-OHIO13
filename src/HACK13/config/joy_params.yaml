@@ -15,3 +15,5 @@ teleop_node:
       yaw: 0
     scale_angular:
       yaw: 0.5
+
+    require_enable_button: false
