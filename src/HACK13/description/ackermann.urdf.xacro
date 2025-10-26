@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<link name="base_link"/>
+
+<link name="frame">
+    <visual>
+        <geometry>
+            <box size="0.0254 0.6096 0.0254"/>
+        </geometry>
+    </visual>
+
+</link>
+
+<joint name="frame_joint" type="fixed">
+    <origin xyz="0.0 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="frame"/>
+</joint>
+
+<link name="left_steering_arm">
+    <visual>
+        <origin xyz="0.0 0.01905 0.0"/>
+        <geometry>
+            <box size="0.0254 0.0381 0.0254"/>
+        </geometry>
+
+    </visual>
+</link>
+
+<joint name="pin_one" type="continuous">
+    <origin xyz="0.0 0.3045 0.0"/>
+    <parent link="frame"/>
+    <child link="left_steering_arm"/>
+    <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<link name="left_tie_rod">
+    <visual>
+        <origin xyz="0.0 0.0635 0.0"/>
+        <geometry>
+            <box size="0.0254 0.127 0.0254"/>
+        </geometry>
+    </visual>
+</link>
+
+<joint name="pin_two" type="continuous">
+    <origin xyz="0.0 0.1737 0.0"/>
+    <parent link="rack"/>
+    <child link="left_tie_rod"/>
+    <axis xyz="0.0 0.0 1.0"/>
+
+</joint>
+
+<link name="rack">
+    <visual>
+        <origin xyz="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.0254 0.347472 0.0254"/>
+        </geometry>
+    </visual>
+</link>
+
+<joint name="joint_name" type="prismatic">
+    <origin xyz="-0.0315 0.0 0.0"/>
+    <parent link="base_link"/>
+    <child link="rack"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <limit lower="-0.03021" upper="0.03021" effort="0.0" velocity="0.0"/>
+</joint>
+
+<link name="right_tie_rod">
+    <visual>
+        <origin xyz="0.0 -0.0635 0.0"/>
+        <geometry>
+            <box size="0.0254 0.127 0.0254"/>
+        </geometry>
+    </visual>
+</link>
+
+<joint name="pin_three" type="continuous">
+    <origin xyz="0.0 -0.1737 0.0"/>
+    <parent link="rack"/>
+    <child link="right_tie_rod"/>
+    <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<link name="right_steering_arm">
+    <visual>
+        <origin xyz="0.0 -0.01905 0.0"/>
+        <geometry>
+            <box size="0.0254 0.0381 0.0254"/>
+        </geometry>
+
+    </visual>
+</link>
+
+<joint name="pin_four" type="continuous">
+    <origin xyz="0.0 -0.3045 0.0"/>
+    <parent link="frame"/>
+    <child link="right_steering_arm"/>
+    <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+</robot>
