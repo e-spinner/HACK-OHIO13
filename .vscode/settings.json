@@ -6,5 +6,6 @@
     "install/hack13/lib/python3.12/site-packages"
 
   ],
+  "cmake.sourceDirectory": "/home/ros/Git/HACK-OHIO13/src/HACK13",
 
 }
