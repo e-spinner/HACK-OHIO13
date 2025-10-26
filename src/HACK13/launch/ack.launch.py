@@ -18,32 +18,19 @@ def generate_launch_description():
   cmd_interpreter = Node(
     package=package_name,
     executable="cmd_interpreter",
+    parameters=[{"use_sim_time": True}],
   )
 
   ack_calc = Node(
     package=package_name,
     executable="ack_calc.py",
+    parameters=[{"use_sim_time": True}],
   )
 
   transform = Node(
     package=package_name,
     executable="transform",
-  )
-
-  pkg_path = os.path.join(get_package_share_directory("hack13"))
-  xacro_file = os.path.join(pkg_path, "description", "ackermann.urdf.xacro")
-  robot_description = xacro.process_file(xacro_file).toxml()  # type: ignore
-
-  robot_state_publisher = Node(
-    package="robot_state_publisher",
-    executable="robot_state_publisher",
-    output="screen",
-    parameters=[
-      {
-        "robot_description": robot_description,
-        "use_sim_time": False,
-      }
-    ],
+    parameters=[{"use_sim_time": True}],
   )
 
   # MARK: Launch!
@@ -53,6 +40,6 @@ def generate_launch_description():
       cmd_interpreter,
       ack_calc,
       transform,
-      robot_state_publisher,
+      # robot_state_publisher,
     ]
   )

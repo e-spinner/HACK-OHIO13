@@ -33,6 +33,7 @@ ament_target_dependencies(
   cmd_interpreter
   rclcpp
   geometry_msgs
+  tf2_ros
 )
 
 # transform
