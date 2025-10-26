@@ -1,5 +1,5 @@
 # left velocity
-Velocity v_left
+float64 v_left
 
 # right velocity
-Velocity r_left
+float64 v_right

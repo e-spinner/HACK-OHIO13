@@ -10,7 +10,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 # find_package(nav_msgs REQUIRED)
-# find_package(tf2_ros REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 # --------------------
@@ -18,7 +18,6 @@ find_package(rosidl_default_generators REQUIRED)
 # --------------------
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Angle.msg"
-  "msg/Velocity.msg"
   "msg/AckState.msg"
   "msg/DiffState.msg"
   DEPENDENCIES builtin_interfaces
@@ -36,11 +35,20 @@ ament_target_dependencies(
   geometry_msgs
 )
 
+# transform
+add_executable(transform src/transform.cpp)
+ament_target_dependencies(
+  transform
+  rclcpp
+  geometry_msgs
+  tf2_ros
+)
 
 # Make executables depend on generated interfaces
 rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 target_link_libraries(cmd_interpreter ${cpp_typesupport_target})
+target_link_libraries(transform ${cpp_typesupport_target})
 
 
 # --------------------
@@ -54,7 +62,7 @@ target_link_libraries(cmd_interpreter ${cpp_typesupport_target})
 # Install Nodes
 # --------------------
 install(
-  TARGETS cmd_interpreter
+  TARGETS cmd_interpreter transform
   DESTINATION lib/${PROJECT_NAME}
 )
 
