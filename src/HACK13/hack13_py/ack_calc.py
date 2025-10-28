@@ -27,12 +27,12 @@ class AckCalc(Node):
     Ideal_Angle = m.degrees(msg.theta)
     Ackermann_Angles = self.Linkage_Angles(Ideal_Angle, Radius)
     Output_Msg = AckState()
-    Output_Msg.theta_2 = -m.radians(Ackermann_Angles[0])
+    Output_Msg.theta_2 = m.radians(Ackermann_Angles[0]) - 3.14
     Output_Msg.theta_3 = m.radians(Ackermann_Angles[1]) + 3.14
-    Output_Msg.theta_4 = -(m.radians(Ackermann_Angles[2]) + 3.14)
+    Output_Msg.theta_4 = m.radians(Ackermann_Angles[2])
     Output_Msg.theta_5 = m.radians(Ackermann_Angles[3])
-    Output_Msg.theta_pin = m.radians(Ideal_Angle) * 1.652
-    Output_Msg.d = (Ackermann_Angles[4] - 131.064) / 1000.0
+    Output_Msg.theta_pin = -m.radians(Ideal_Angle) * 1.652
+    Output_Msg.d = -(Ackermann_Angles[4] - 131.064) / 1000.0
     self.Ackermann_State_Pub.publish(Output_Msg)
 
   def Crank_Slider(self, a: float, b: float, c: float, Theta_2: float):
